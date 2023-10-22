@@ -1,0 +1,25 @@
+#Ignore the dataset
+#IMPORTANT: make sure that your dataset is stored in a folder with the same as the one specified below
+
+hw1_data/*
+*png
+*jpg
+
+hw1_data.zip
+hw1-1/output/*
+hw1-2/output/*
+hw1-3/output/*
+hw1-3/predict_mask/*
+hw1-1/__pycache__/*
+hw1-2/__pycache__/*
+hw1-2/byol_pytorch/__pycache__/*
+hw1-3/__pycache__/*
+
+hw1-1_output.csv
+hw1-2_input.csv
+hw1-2_output.csv
+hw1-3_output/*
+
+model1-1.pt
+model1-2.pt
+model1-3.pt
