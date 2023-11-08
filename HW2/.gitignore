@@ -1,0 +1,20 @@
+#Ignore the dataset
+#IMPORTANT: make sure that your dataset is stored in a folder with the same as the one specified below
+
+hw2_data/*
+models/*
+
+hw2-1/__pycache__/*
+hw2-1/output/*
+
+hw2-2/__pycache__/*
+hw2-2/output/*
+
+hw2-3/__pycache__/*
+hw2-3/saved_plot/*
+hw2-3/trained_models/*
+
+2-1_out/*
+2-2_out/*
+svhn.csv
+usps.csv
