@@ -9,39 +9,40 @@ from dataloader import MyDataloader
 
 C = CONSTANT()
 
-class MyModel(nn.Module):
-    # Implement your model here
-    def __init__(self):
-        # Initialize your model object
-        super(MyModel, self).__init__()
-        self.backbone = models.vgg16(weights=models.VGG16_Weights.DEFAULT).features
-        # Source: https://github.com/sairin1202/fcn32-pytorch/blob/master/pytorch-fcn32.py 
-        # Reference: https://github.com/wkentaro/pytorch-fcn/blob/main/torchfcn/models/fcn32s.py
-        self.backbone[0].padding=(100,100)
-        self.fcn32s = nn.Sequential(
-            nn.Conv2d(512, 4096, 7),
-            nn.ReLU(inplace=True),
-            nn.Dropout2d(),
+# class MyModel(nn.Module):
+#     # Implement your model here
+#     def __init__(self):
+#         # Initialize your model object
+#         super(MyModel, self).__init__()
+#         # self.backbone = models.vgg16(weights=models.VGG16_Weights.DEFAULT).features
+#         self.backbone = models.vgg16(weights=None).features
+#         # Source: https://github.com/sairin1202/fcn32-pytorch/blob/master/pytorch-fcn32.py 
+#         # Reference: https://github.com/wkentaro/pytorch-fcn/blob/main/torchfcn/models/fcn32s.py
+#         self.backbone[0].padding=(100,100)
+#         self.fcn32s = nn.Sequential(
+#             nn.Conv2d(512, 4096, 7),
+#             nn.ReLU(inplace=True),
+#             nn.Dropout2d(),
 
-            nn.Conv2d(4096, 4096, 1),
-            nn.ReLU(inplace=True),
-            nn.Dropout2d(),
+#             nn.Conv2d(4096, 4096, 1),
+#             nn.ReLU(inplace=True),
+#             nn.Dropout2d(),
 
-            nn.Conv2d(4096, C.classes, 1),
-            nn.ConvTranspose2d(C.classes, C.classes, 64, 32, bias=False)
-            )
+#             nn.Conv2d(4096, C.classes, 1),
+#             nn.ConvTranspose2d(C.classes, C.classes, 64, 32, bias=False)
+#             )
         
 
-    def forward(self, x):
-        # Return the output of model given the input x
-        x_size = x.size()
-        print(x.shape)
-        x = self.backbone(x)
-        print(x.shape)
-        x = self.fcn32s(x)
-        print(x.shape)
-        x = x[:, :, 19:19 + x_size[2], 19:19 + x_size[3]].contiguous()
-        return x
+#     def forward(self, x):
+#         # Return the output of model given the input x
+#         x_size = x.size()
+#         print(x.shape)
+#         x = self.backbone(x)
+#         print(x.shape)
+#         x = self.fcn32s(x)
+#         print(x.shape)
+#         x = x[:, :, 19:19 + x_size[2], 19:19 + x_size[3]].contiguous()
+#         return x
 
 
 class MyModel(nn.Module):
@@ -67,7 +68,7 @@ if __name__ == '__main__':
 
     for x,y in dataloaders.loader['valid']:
         x = x.to(C.device)
-        xx = {'aux': x, 'out':x}
+        xx = {'aux':x, 'out':x}
         yhat = model(x)
         print(x.shape, y.shape)
         print(yhat.shape)

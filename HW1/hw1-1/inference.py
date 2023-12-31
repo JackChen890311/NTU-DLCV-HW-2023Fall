@@ -20,16 +20,16 @@ def inference(args):
     loader = dataloaders.loader['test']
     filenames = dataloaders.filenames['test']
 
-    accu, cnt = 0, 0
+    # accu, cnt = 0, 0
     prediction = torch.zeros((0,1))
     for x,y in loader:
-        x,y = x.to(C.device),y.to(C.device)
+        x = x.to(C.device)
         yhat = model(x)
         y_idx = torch.argmax(yhat, 1)
         prediction = torch.cat((prediction,y_idx.unsqueeze(1).to('cpu')))
-        accu += torch.sum(y_idx == y).item()
-        cnt += len(y)
-    print('ACCU:',accu/cnt)
+        # accu += torch.sum(y_idx == y).item()
+        # cnt += len(y)
+    # print('ACCU:',accu/cnt)
     
     csv_data = {
         'filename': filenames,

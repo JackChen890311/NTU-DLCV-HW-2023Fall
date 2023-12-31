@@ -1,0 +1,12 @@
+dataset/*
+val/*
+
+hw4/__pycache__
+hw4/datasets/__pycache__
+
+hw4/checkpoints/*
+hw4/prediction/*
+hw4/lightning_logs/*
+hw4/old_ckpts/*
+
+checkpoints/*

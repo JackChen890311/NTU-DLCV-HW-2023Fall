@@ -63,8 +63,11 @@ class OfficeDataset(Dataset):
     def __getitem__(self, idx):
         # Return an item pair, e.g. dataset[idx] and its label
         img = self.preprocess(Image.open(os.path.join(self.data_path,self.filenames[idx])).convert('RGB'))
-        label = self.filenames[idx].split('_')[0]
-        return img, int(label)
+        try:
+            label = int(self.filenames[idx].split('_')[0])
+        except:
+            label = -1
+        return img, label
 
 
 class MyDataloader():
@@ -93,7 +96,6 @@ class MyDataloader():
                 dataset = MiniDataset(path, preprocess, 'train')
                 self.loader[name] = self.loader_prepare(dataset, shuffle)
                 self.filenames[name] = dataset.filenames
-        
             elif name == 'valid_ssl':
                 dataset = MiniDataset(path, preprocess, 'valid')
                 self.loader[name] = self.loader_prepare(dataset, shuffle)

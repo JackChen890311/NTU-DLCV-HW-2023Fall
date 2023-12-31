@@ -1,0 +1,11 @@
+hw3_data/*
+
+hw3-1/result/*
+hw3-1/result.csv
+
+hw3-2/output/*
+hw3-2/__pycache__/*
+hw3_2/attn_map.pkl
+
+val.json
+model3-2/*

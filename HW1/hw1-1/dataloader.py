@@ -41,7 +41,10 @@ class MyDataset(Dataset):
         # Return an item pair, e.g. dataset[idx] and its label
         # img = read_image(os.path.join(self.data_path,self.filenames[idx]))
         img = self.preprocess(Image.open(os.path.join(self.data_path,self.filenames[idx])).convert('RGB'))
-        label = int(self.filenames[idx].split('_')[0])
+        try:
+            label = int(self.filenames[idx].split('_')[0])
+        except:
+            label = -1
         return img, label
 
 

@@ -8,7 +8,8 @@ class MyModel(nn.Module):
         # Initialize your model object
         super(MyModel, self).__init__()
         # self.backbone = models.alexnet(weights=None)
-        self.backbone = models.efficientnet_v2_m(weights=models.EfficientNet_V2_M_Weights.DEFAULT)
+        # self.backbone = models.efficientnet_v2_m(weights=models.EfficientNet_V2_M_Weights.DEFAULT)
+        self.backbone = models.efficientnet_v2_m(weights=None)
         self.linear1 = nn.Linear(1000, 50)
 
 

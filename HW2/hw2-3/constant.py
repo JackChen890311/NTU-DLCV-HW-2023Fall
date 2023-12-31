@@ -7,7 +7,7 @@ class CONSTANT():
         self.lr = 5e-3
         self.mom = 0.9
         self.bs = 16
-        self.nw = 16
+        self.nw = 4
         self.pm = True
         self.verbose = 5
         self.loss_coef = 0.5 # higher -> more domain loss

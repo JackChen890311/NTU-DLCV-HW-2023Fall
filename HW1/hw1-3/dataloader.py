@@ -45,7 +45,31 @@ class MyDataset(Dataset):
         masks[weighted_sum_tensor == 7] = 5  # (White: 111) Barren land 
         masks[weighted_sum_tensor == 0] = 6  # (Black: 000) Unknown 
         return masks
+    
 
+class TestDataset(Dataset):
+    # Implement your dataset here
+    def __init__(self, data_path):
+        # Initialize your dataset object
+        print('Using TestDataset...')
+        self.data_path = data_path
+        self.satFiles= sorted([file for file in os.listdir(data_path)])
+        self.filenames = sorted([file.split('_')[0] for file in os.listdir(data_path)])
+        self.rgb_pre = T.Compose([
+            T.ToTensor(),
+            T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        ])
+
+    def __len__(self):
+        # Return the length of your dataset
+        return len(self.satFiles)
+    
+    def __getitem__(self, idx):
+        # Return an item pair, e.g. dataset[idx] and its label
+        x = self.rgb_pre(Image.open(os.path.join(self.data_path,self.satFiles[idx])))
+        y = torch.zeros(x.shape[1], x.shape[2])
+        return x, y
+    
 
 class MyDataloader():
     def __init__(self):
@@ -66,7 +90,10 @@ class MyDataloader():
         
         for name in setupNames:
             path, shuffle = mapping[name]
-            dataset = MyDataset(path)
+            if name == 'test':
+                dataset = TestDataset(path)
+            else:
+                dataset = MyDataset(path)
             self.loader[name] = self.loader_prepare(dataset, shuffle)
             self.filenames[name] = dataset.filenames
         

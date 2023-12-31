@@ -28,12 +28,13 @@ if __name__ == '__main__':
     args = parser.parse_args()
     print(args)
     
-    C = CONSTANT()
     if 'svhn' in args.input:
         target = FuckDataloader('svhn')
+        C = CONSTANT(target='svhn')
         target.C.svhn_path = args.input
     elif 'usps' in args.input:
         target = FuckDataloader('usps')
+        C = CONSTANT(target='usps')
         target.C.usps_path = args.input
 
     target.setup(['test'])
