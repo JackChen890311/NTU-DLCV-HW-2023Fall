@@ -25,3 +25,4 @@ Tasks: 3D Novel View Synthesis
  - [Report](https://docs.google.com/presentation/d/176HpfzB0ZiTGE225IpXKgwAHd-Tvw-EaItdvAeEzDXo/edit#slide=id.g262644fa15b_0_50)
 
 ### Final Project - Visual Queries 2D Localization
+Please see corresponding folder for more information.
